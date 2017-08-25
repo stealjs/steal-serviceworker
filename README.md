@@ -1,5 +1,7 @@
 # steal-serviceworker
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/stealjs/steal-serviceworker.svg)](https://greenkeeper.io/)
+
 [![Build Status](https://travis-ci.org/stealjs/steal-serviceworker.svg?branch=master)](https://travis-ci.org/stealjs/steal-serviceworker)
 
 steal-serviceworker helps you to create a service worker for your app that's build with steal-tools
