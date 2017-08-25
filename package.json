@@ -1,0 +1,28 @@
+{
+  "name": "steal-serviceworker",
+  "version": "0.0.1",
+  "description": "A steal-tool plugin for creating a serviceworker",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "mocha test/test.js"
+  },
+  "keywords": [
+    "stealjs",
+    "steal-tools",
+    "serviceworker"
+  ],
+  "author": "Julian Kern",
+  "license": "MIT",
+  "dependencies": {
+    "lodash.template": "^4.4.0",
+    "sw-precache": "^5.2.0",
+    "uglify-js": "^3.0.28"
+  },
+  "devDependencies": {
+    "chai": "^4.1.1",
+    "is-there": "^4.4.2",
+    "mocha": "^3.5.0",
+    "steal": "^1.5.8",
+    "steal-tools": "^1.8.4"
+  }
+}
