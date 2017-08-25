@@ -9,7 +9,7 @@ const removeDirAsync = promisify(fs.remove);
 const removeFileAsync = promisify(fs.unlink);
 
 
-const precache = require("../src/main");
+const precache = require("../lib/main");
 
 
 describe("steal-build", function() {

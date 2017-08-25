@@ -1,4 +1,7 @@
-const {promisify} = require('util');
+// const {promisify} = require('util');
+// use native promisify if node 8 lands on steal-tools
+const promisify = require("es6-promisify");
+
 const path = require("path");
 const fs = require("fs");
 const UglifyJS = require("uglify-js");
@@ -6,23 +9,25 @@ const swPrecache = require("sw-precache");
 
 const _template = require("lodash.template");
 
-
 const fsReadFile = promisify(fs.readFile);
 const fsWriteFile = promisify(fs.writeFile);
 const fsUnlink = promisify(fs.unlink);
 
-
+/**
+ * Creates a service worker for you
+ */
 class ServiceWorker {
     constructor(buildResult, options) {
+        const templateDir = path.join(__dirname, "..", "templates");
 
         this._buildResult = buildResult;
 
         this.swFilename = options.filename || "service-worker.js";
-        this.swTemplate = path.join(__dirname, "service-worker.tmpl");
+        this.swTemplate = path.join(templateDir, "service-worker.tmpl");
 
         this.bundleRegistration = !(options.bundleRegistration != null);
         this.cacheRegistration = options.cacheRegistration;
-        this.registrationTemplate = options.registrationTemplate || path.join(__dirname, "service-worker-registration.tmpl");
+        this.registrationTemplate = options.registrationTemplate || path.join(templateDir, "service-worker-registration.tmpl");
 
         delete options.filename;
         delete options.bundleRegistration;
