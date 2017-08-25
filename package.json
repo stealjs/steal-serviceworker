@@ -5,7 +5,10 @@
   "main": "lib/main.js",
   "scripts": {
     "test": "mocha test/test.js",
-    "build": "babel src -d lib"
+    "build": "babel src -d lib",
+    "release:patch": "npm version patch && npm publish",
+    "release:minor": "npm version minor && npm publish",
+    "release:major": "npm version major && npm publish"
   },
   "keywords": [
     "stealjs",
