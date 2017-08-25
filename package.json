@@ -2,7 +2,7 @@
   "name": "steal-serviceworker",
   "version": "0.0.1",
   "description": "A steal-tool plugin for creating a serviceworker",
-  "main": "src/main.js",
+  "main": "lib/main.js",
   "scripts": {
     "test": "mocha test/test.js",
     "build": "babel src -d lib"
