@@ -6,6 +6,7 @@ const path = require("path");
 const fs = require("fs");
 const UglifyJS = require("uglify-js");
 const swPrecache = require("sw-precache");
+const winston = require("winston");
 
 const _template = require("lodash.template");
 
@@ -221,6 +222,7 @@ class ServiceWorker {
 }
 
 module.exports = async function (buildResult, options) {
+	winston.info("Creating a service worker...");
     const serviceWorker = new ServiceWorker(buildResult, options);
     await serviceWorker.create();
     return serviceWorker.buildResult;
