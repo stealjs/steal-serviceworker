@@ -17,7 +17,7 @@ const fsUnlink = promisify(fs.unlink);
  * Creates a service worker for you
  */
 class ServiceWorker {
-    constructor(buildResult, options) {
+    constructor(buildResult, options = {}) {
         const templateDir = path.join(__dirname, "..", "templates");
 
         this._buildResult = buildResult;

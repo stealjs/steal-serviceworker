@@ -36,7 +36,7 @@ describe("steal-build", function() {
 
 
         it("create a service-worker", (done) => {
-            precache(this.buildResult, {}).then(() => {
+            precache(this.buildResult).then(() => {
                 const sw = path.join(__dirname,"basics","service-worker.js");
 
                 assert.isTrue(exist.file(sw));
