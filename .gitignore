@@ -105,4 +105,3 @@ typings/
 .env
 
 !/test/slim/node_modules/
-/package-lock.json
