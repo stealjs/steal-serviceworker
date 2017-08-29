@@ -139,7 +139,7 @@ describe("steal-build", function() {
         });
 
         it("put service worker registration into a bundledSteal file", (done) => {
-            precache(this.buildResult, {}).then(() => {
+            precache(this.buildResult, true).then(() => {
                 const stealProd = path.join(__dirname,"basics","dist","bundles","basic","index.js");
                 let content = fs.readFileSync(stealProd, {encoding: "utf-8"});
                 assert.match(content, /navigator\.serviceWorker\.register/gm);
