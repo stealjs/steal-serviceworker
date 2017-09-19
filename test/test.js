@@ -94,6 +94,7 @@ describe("steal-build", function() {
             precache(this.buildResult, {
                 staticFileGlobs: [
                     'dist/bundles/**/*.*',
+                    path.join(__dirname, 'basics', 'prod.html')
                 ]
             }).then(() => {
                 const sw = path.join(__dirname,"basics","service-worker.js");
