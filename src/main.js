@@ -28,6 +28,8 @@ class ServiceWorker {
         this.swFilename = options.filename || "service-worker.js";
         this.swTemplate = path.join(templateDir, "service-worker.tmpl");
 
+        this.stealProductionFile = (buildResult.options.bundlePromisePolyfill === false) ? 'steal-sans-promises.production.js' : 'steal.production.js';
+
         this.bundleRegistration = !(options.bundleRegistration != null);
         this.cacheRegistration = options.cacheRegistration;
         this.registrationTemplate = options.registrationTemplate || path.join(templateDir, "service-worker-registration.tmpl");
@@ -38,7 +40,7 @@ class ServiceWorker {
 
         if (!buildResult || !buildResult.configuration || !buildResult.configuration.dest) {
             throw new Error(
-                'Provide a buildResult'
+                'no buildResult is provided'
             );
         }
 
@@ -144,7 +146,7 @@ class ServiceWorker {
                     await this._writeIntoMains(mains);
 
                 } else {
-                    const stealProd = path.join(this.destFolder, "steal.production.js");
+                    const stealProd = path.join(this.destFolder, this.stealProductionFile);
 
                     await this._writeIFFE2File(stealProd);
                 }
@@ -226,7 +228,7 @@ class ServiceWorker {
 }
 
 module.exports = async function (buildResult, options) {
-	winston.info("Creating a service worker...");
+    winston.info("Creating a service worker...");
     const serviceWorker = new ServiceWorker(buildResult, options);
     await serviceWorker.create();
     return serviceWorker.buildResult;
