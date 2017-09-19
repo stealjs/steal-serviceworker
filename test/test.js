@@ -203,6 +203,31 @@ describe("steal-build", function() {
         });
 
     });
+    
+    describe("sans promise", function () {
+        after(async () => {
+            await removeDirAsync(__dirname + "/basics/dist").catch((e) => {});
+            await removeFileAsync(path.join(__dirname, "basics", "service-worker.js")).catch(() => {});
+        });
+
+        it("create a service worker registration and put it into steal sans promise", async () => {
+
+            const buildResult = await stealTools.build({
+                config: __dirname + "/basics/package.json!npm"
+            }, {
+                quiet: true,
+                minify: false,
+                bundlePromisePolyfill: false
+            });
+
+            await precache(buildResult);
+
+            const stealProd = path.join(__dirname,"basics","dist","steal-sans-promises.production.js");
+            let content = fs.readFileSync(stealProd, {encoding: "utf-8"});
+            assert.match(content, /navigator\.serviceWorker\.register/gm);
+
+        });
+    });
 
 });
 
