@@ -53,10 +53,12 @@ class ServiceWorker {
             ];
         } else {
             let globs = [];
-            // go though all the globs and add the baseUrl path to it
             for (let glob of this.options.staticFileGlobs) {
+                // go though all the globs and add the baseUrl path to it
                 if (!path.isAbsolute(glob)) {
                     globs.push(path.join(this.baseUrl, glob));
+                }else{
+                    globs.push(glob);
                 }
             }
             this.options.staticFileGlobs = globs;

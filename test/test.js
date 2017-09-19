@@ -29,9 +29,9 @@ describe("steal-build", function() {
         });
 
         after(async () => {
-            await removeDirAsync(__dirname + "/basics/dist").catch((e) => {});
-            await removeFileAsync(path.join(__dirname, "basics", "service-worker.js")).catch(() => {});
-            await removeFileAsync(path.join(__dirname, "basics", "sw.js")).catch(() => {});
+            //await removeDirAsync(__dirname + "/basics/dist").catch((e) => {});
+            //await removeFileAsync(path.join(__dirname, "basics", "service-worker.js")).catch(() => {});
+            //await removeFileAsync(path.join(__dirname, "basics", "sw.js")).catch(() => {});
         });
 
 
@@ -90,10 +90,11 @@ describe("steal-build", function() {
             }).then(done, done);
         });
 
-        it("custom staticFileGlobs", (done) => {
+        it.only("custom staticFileGlobs", (done) => {
             precache(this.buildResult, {
                 staticFileGlobs: [
                     'dist/bundles/**/*.*',
+                    path.join(__dirname, 'basics', 'prod.html')
                 ]
             }).then(() => {
                 const sw = path.join(__dirname,"basics","service-worker.js");
