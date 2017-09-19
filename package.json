@@ -1,6 +1,6 @@
 {
   "name": "steal-serviceworker",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A steal-tool plugin for creating a serviceworker",
   "main": "lib/main.js",
   "scripts": {
