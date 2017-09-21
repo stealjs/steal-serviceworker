@@ -50,5 +50,8 @@
     ],
     "sourceMap": false,
     "instrument": false
-  }
+  },
+  "files": [
+    "lib/index.js"
+  ]
 }
