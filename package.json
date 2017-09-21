@@ -4,7 +4,8 @@
   "description": "A steal-tool plugin for creating a serviceworker",
   "main": "lib/main.js",
   "scripts": {
-    "test": "mocha test/test.js",
+    "test": "nyc --reporter=html --reporter=text mocha test/test.js",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
     "build": "babel src -d lib",
     "release:patch": "npm version patch && npm publish",
     "release:minor": "npm version minor && npm publish",
@@ -28,8 +29,10 @@
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.0",
     "chai": "^4.1.1",
+    "coveralls": "^2.13.1",
     "is-there": "^4.4.2",
     "mocha": "^3.5.0",
+    "nyc": "^11.2.1",
     "steal": "^1.5.8",
     "steal-tools": "^1.8.4"
   }
