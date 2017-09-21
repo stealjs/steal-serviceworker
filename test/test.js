@@ -38,6 +38,27 @@ describe("steal-build", function() {
             await removeFileAsync(path.join(__dirname, "basics", "sw.js")).catch(() => {});
         });
 
+        it("throws if not buildResult is provided", (done) => {
+            precache().then(() => {
+                assert.fail();
+                done();
+            }).catch((error) => {
+                assert.equal(error.message, "no buildResult is provided");
+                done();
+            });
+        });
+
+        it("only supports optimize and build build-types", (done) => {
+            const buildResult = Object.assign({}, this.buildResult, {buildType: "foobar"});
+            precache(buildResult).then(() => {
+                assert.fail();
+                done();
+            }).catch((error) => {
+                assert.equal(error.message, 'steal-sericeworker only supports "build" and "optimize" build-types');
+                done();
+            });
+        });
+
 
         it("create a service-worker", (done) => {
             precache(this.buildResult).then(() => {
