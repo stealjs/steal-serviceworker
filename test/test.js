@@ -8,8 +8,12 @@ const stealTools = require("steal-tools");
 const removeDirAsync = promisify(fs.remove);
 const removeFileAsync = promisify(fs.unlink);
 
-
-const precache = require("../lib/main");
+let precache;
+if(process.env.NODE_ENV === "test"){
+    precache = require("../src/main");
+}else{
+    precache = require("../lib/main");
+}
 
 
 describe("steal-build", function() {
@@ -32,6 +36,27 @@ describe("steal-build", function() {
             await removeDirAsync(__dirname + "/basics/dist").catch((e) => {});
             await removeFileAsync(path.join(__dirname, "basics", "service-worker.js")).catch(() => {});
             await removeFileAsync(path.join(__dirname, "basics", "sw.js")).catch(() => {});
+        });
+
+        it("throws if not buildResult is provided", (done) => {
+            precache().then(() => {
+                assert.fail();
+                done();
+            }).catch((error) => {
+                assert.equal(error.message, "no buildResult is provided");
+                done();
+            });
+        });
+
+        it("only supports optimize and build build-types", (done) => {
+            const buildResult = Object.assign({}, this.buildResult, {buildType: "foobar"});
+            precache(buildResult).then(() => {
+                assert.fail();
+                done();
+            }).catch((error) => {
+                assert.equal(error.message, 'steal-sericeworker only supports "build" and "optimize" build-types');
+                done();
+            });
         });
 
 

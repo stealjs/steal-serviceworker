@@ -4,7 +4,9 @@
   "description": "A steal-tool plugin for creating a serviceworker",
   "main": "lib/main.js",
   "scripts": {
-    "test": "nyc --reporter=html --reporter=text mocha test/test.js",
+    "test": "npm run test:es5 && npm run test:es6",
+    "test:es5": "mocha test/test.js",
+    "test:es6": "cross-env NODE_ENV=test nyc mocha test/test.js",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "build": "babel src -d lib",
     "release:patch": "npm version patch && npm publish",
@@ -27,13 +29,30 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-plugin-istanbul": "^4.1.5",
     "babel-preset-env": "^1.6.0",
     "chai": "^4.1.1",
     "coveralls": "^2.13.1",
+    "cross-env": "^5.0.5",
     "is-there": "^4.4.2",
     "mocha": "^3.5.0",
     "nyc": "^11.2.1",
     "steal": "^1.5.8",
     "steal-tools": "^1.8.4"
-  }
+  },
+  "nyc": {
+    "require": [
+      "babel-register"
+    ],
+    "reporter": [
+      "lcov",
+      "text"
+    ],
+    "sourceMap": false,
+    "instrument": false
+  },
+  "files": [
+    "lib/index.js",
+    "templates/"
+  ]
 }
