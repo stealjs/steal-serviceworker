@@ -8,8 +8,12 @@ const stealTools = require("steal-tools");
 const removeDirAsync = promisify(fs.remove);
 const removeFileAsync = promisify(fs.unlink);
 
-
-const precache = require("../lib/main");
+let precache;
+if(process.env.NODE_ENV === "test"){
+    precache = require("../src/main");
+}else{
+    precache = require("../lib/main");
+}
 
 
 describe("steal-build", function() {
