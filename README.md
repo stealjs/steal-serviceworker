@@ -2,7 +2,8 @@
 
 [![Join the chat at https://gitter.im/canjs/canjs](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/stealjs/steal?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/stealjs/steal-serviceworker/blob/master/LICENSE.md)
-[![npm version](https://badge.fury.io/js/steal-serviceworker.svg)](https://www.npmjs.com/package/stealjs/steal-serviceworker)
+[![npm version](https://badge.fury.io/js/steal-serviceworker.svg)](https://badge.fury.io/js/steal-serviceworker)
+[![Coverage Status](https://coveralls.io/repos/github/stealjs/steal-serviceworker/badge.svg?branch=master)](https://coveralls.io/github/stealjs/steal-serviceworker?branch=master)
 [![Travis build status](https://travis-ci.org/stealjs/steal-serviceworker.svg?branch=master)](https://travis-ci.org/stealjs/steal-serviceworker)
 [![Greenkeeper badge](https://badges.greenkeeper.io/stealjs/steal-serviceworker.svg)](https://greenkeeper.io/)
 
