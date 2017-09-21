@@ -11,6 +11,7 @@
 
 ## Usage
 
+**build.js**
 ```js
 const stealTools = require("steal-tools");
 const precache = require("steal-serviceworker");
@@ -20,10 +21,17 @@ stealTools.build({
     config: __dirname + "/basics/package.json!npm"
 }).then(function(buildResult){
     
-   precache(buildResult, {});
+   precache(buildResult);
    
 });
 ```
+
+**index.html**
+```html
+<script src="/dist/steal.production.js"></script>
+```
+
+It's that easy?
 
 ## API
 
@@ -43,7 +51,8 @@ An optional object for specifying additional options. They are:
 
 ##### `bundleRegistration` [boolean]
 Write the [service worker registration](templates/service-worker-registration.tmpl) template into `steal.production.js` or not.
-If `false` the registration code gets written into a file named `service-worker-registration.js` into the [dest folder](https://stealjs.com/docs/steal-tools.build.html#dest)
+If `false` the registration code gets written into a file named `service-worker-registration.js` into the [dest folder](https://stealjs.com/docs/steal-tools.build.html#dest). You have to include the registration script yourself<br> 
+`<script src="/dist/service-worker-registration.js"></script>`
 
 Default: `false`
 
@@ -62,12 +71,18 @@ E.g. you can handle the `state` of the service worker and can implement your own
 
 Default: `path.join(__dirname, "service-worker-registration.tmpl")`
 
-##### options parameter provided by [Google’s sw-precache](https://github.com/GoogleChrome/sw-precache)
+##### all options provided by [Google’s sw-precache](https://github.com/GoogleChrome/sw-precache)<br>
+like
 ```js
 precache(buildResult, {
     staticFileGlobs: [
-        
-    ] 
+        path.join(__dirname, "dist", '**', '*.*'),
+        path.join(__dirname, "src", "styles.css")
+    ],
+    runtimeCaching: [{
+        urlPattern: "/",
+        handler: "networkFirst"
+    }]
 });
 ```
 
