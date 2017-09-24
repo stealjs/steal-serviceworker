@@ -4,6 +4,9 @@
   "description": "A steal-tool plugin for creating a serviceworker",
   "main": "lib/main.js",
   "scripts": {
+    "preversion": "npm run build && npm test",
+    "version": "git commit -am \"Update version number\" && git checkout -b release",
+    "postversion": "git push --tags && git checkout master && git branch -D release && git push",
     "test": "npm run test:es5 && npm run test:es6",
     "test:es5": "mocha test/test.js",
     "test:es6": "cross-env NODE_ENV=test nyc mocha test/test.js",
