@@ -287,7 +287,7 @@ describe("slim", function () {
     });
 
 
-    it.only("multimain with splitLoader = false", async () => {
+    it("multimain with splitLoader = false", async () => {
         let buildResult = await stealTools.optimize({
             main: ["main1", "main2"],
             config: __dirname + "/multimain/package.json!npm"
