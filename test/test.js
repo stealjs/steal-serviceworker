@@ -59,6 +59,17 @@ describe("steal-build", function() {
             });
         });
 
+        it("throws on malconfigured builtResult", (done) => {
+            const buildResult = Object.assign({}, {foo: "bar"});
+            precache(buildResult).then(() => {
+                assert.fail();
+                done();
+            }).catch((error) => {
+                assert.equal(error.message, 'malconfigured builtResult');
+                done();
+            });
+        });
+
 
         it("create a service-worker", (done) => {
             precache(this.buildResult).then(() => {
@@ -344,6 +355,31 @@ describe("slim", function () {
         // TODO: write assertion
     });
 
-    // TODO: targeting web only not the node targets
-    // https://stealjs.com/docs/steal-tools.BuildOptions.html -> target
+    it("targeting", async () => {
+        let buildResult = await stealTools.optimize({
+            config: __dirname + "/slim/package.json!npm"
+        }, {
+            minify: false,
+            debug: false,
+            quiet: true,
+            splitLoader: false,
+            target: ["node", "web"]
+        });
+        await precache(buildResult);
+
+        const sw = path.join(__dirname, "slim", "service-worker.js");
+        assert.isTrue(exist.file(sw));
+        let swContent = fs.readFileSync(sw, {encoding: "utf-8"});
+        assert.match(swContent, /"dist\/bundles\/web\/slim\/main\.js"/gm);
+        assert.match(swContent, /"dist\/bundles\/web\/slim\/main\.css"/gm);
+
+        const main = path.join(__dirname,"slim","dist","bundles", "web", "slim", "main.js");
+        let mainContent = fs.readFileSync(main, {encoding: "utf-8"});
+        assert.match(mainContent, /navigator\.serviceWorker\.register/gm);
+
+        const nodeMain = path.join(__dirname,"slim","dist","bundles", "node", "slim", "main.js");
+        let nodeMainContent = fs.readFileSync(nodeMain, {encoding: "utf-8"});
+        assert.notMatch(nodeMainContent, /navigator\.serviceWorker\.register/gm);
+
+    });
 });
