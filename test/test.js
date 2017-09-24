@@ -374,8 +374,12 @@ describe("slim", function () {
         assert.match(swContent, /"dist\/bundles\/web\/slim\/main\.css"/gm);
 
         const main = path.join(__dirname,"slim","dist","bundles", "web", "slim", "main.js");
-        let content = fs.readFileSync(main, {encoding: "utf-8"});
-        assert.match(content, /navigator\.serviceWorker\.register/gm);
+        let mainContent = fs.readFileSync(main, {encoding: "utf-8"});
+        assert.match(mainContent, /navigator\.serviceWorker\.register/gm);
+
+        const nodeMain = path.join(__dirname,"slim","dist","bundles", "node", "slim", "main.js");
+        let nodeMainContent = fs.readFileSync(nodeMain, {encoding: "utf-8"});
+        assert.notMatch(nodeMainContent, /navigator\.serviceWorker\.register/gm);
 
     });
 });
