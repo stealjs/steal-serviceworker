@@ -272,7 +272,7 @@ describe("slim", function () {
             debug: false,
             quiet: true
         });
-        await precache(buildResult, {});
+        await precache(buildResult);
 
         const sw = path.join(__dirname, "slim", "service-worker.js");
         assert.isTrue(exist.file(sw));
@@ -287,8 +287,8 @@ describe("slim", function () {
     });
 
 
-    it.skip("multimain", async () => {
-        this.buildResult = await stealTools.optimize({
+    it("multimain with splitLoader = false", async () => {
+        let buildResult = await stealTools.optimize({
             main: ["main1", "main2"],
             config: __dirname + "/multimain/package.json!npm"
         }, {
@@ -297,7 +297,18 @@ describe("slim", function () {
             quiet: true,
             splitLoader: false
         });
-        var foo = "bar";
+        await precache(buildResult);
+
+        const main1 = path.join(__dirname,"multimain","dist","bundles","main1.js");
+        const main2 = path.join(__dirname,"multimain","dist","bundles","main2.js");
+        const shared = path.join(__dirname,"multimain","dist","bundles","main1-main2.js");
+
+        let contentMain1 = fs.readFileSync(main1, {encoding: "utf-8"});
+        assert.match(contentMain1, /navigator\.serviceWorker\.register/gm);
+        let contentMain2 = fs.readFileSync(main2, {encoding: "utf-8"});
+        assert.match(contentMain2, /navigator\.serviceWorker\.register/gm);
+        let sharedContent = fs.readFileSync(shared, {encoding: "utf-8"});
+        assert.notMatch(sharedContent, /navigator\.serviceWorker\.register/gm);
     });
 
     it("splitloader", async () => {
@@ -318,5 +329,21 @@ describe("slim", function () {
 
     });
 
-    // todo: targeting web only not the node targets
+    // TODO: https://github.com/stealjs/steal-tools/issues/838
+    it.skip("splitLoader with multimain", async () => {
+        let buildResult = await stealTools.optimize({
+            main: ["main1", "main2"],
+            config: __dirname + "/multimain/package.json!npm"
+        }, {
+            minify: false,
+            quiet: true,
+            splitLoader: true
+        });
+        await precache(buildResult);
+
+        // TODO: write assertion
+    });
+
+    // TODO: targeting web only not the node targets
+    // https://stealjs.com/docs/steal-tools.BuildOptions.html -> target
 });
