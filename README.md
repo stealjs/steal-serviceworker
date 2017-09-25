@@ -9,6 +9,9 @@
 
 `steal-serviceworker` helps you to create a service worker for your app that’s built with [steal-tools](https://stealjs.com/docs/steal-tools.html).
 
+## Requirements
+NodeJS 6+
+
 ## Usage
 
 **build.js**
