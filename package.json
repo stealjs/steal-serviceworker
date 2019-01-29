@@ -28,7 +28,7 @@
     "lodash.template": "^4.4.0",
     "sw-precache": "^5.2.0",
     "uglify-js": "^3.0.28",
-    "winston": "^2.3.1"
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
