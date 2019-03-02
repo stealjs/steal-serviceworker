@@ -1,6 +1,7 @@
 # steal-serviceworker
 
-[![Join the chat at https://gitter.im/canjs/canjs](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/stealjs/steal?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Join our Slack](https://img.shields.io/badge/slack-join%20chat-611f69.svg)](https://www.bitovi.com/community/slack?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Join our Discourse](https://img.shields.io/discourse/https/forums.bitovi.com/posts.svg)](https://forums.bitovi.com/?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/stealjs/steal-serviceworker/blob/master/LICENSE.md)
 [![npm version](https://badge.fury.io/js/steal-serviceworker.svg)](https://badge.fury.io/js/steal-serviceworker)
 [![Coverage Status](https://coveralls.io/repos/github/stealjs/steal-serviceworker/badge.svg?branch=master)](https://coveralls.io/github/stealjs/steal-serviceworker?branch=master)
