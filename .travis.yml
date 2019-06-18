@@ -1,8 +1,8 @@
 language: node_js
 node_js:
-  - 8.0
+  - 8
 sudo: false
-before_install:
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
 after_success: npm run coverage
+dist: xenial
+services:
+  - xvfb
