@@ -38,7 +38,7 @@
     "coveralls": "^3.0.0",
     "cross-env": "^5.0.5",
     "is-there": "^4.4.2",
-    "mocha": "^4.0.0",
+    "mocha": "^6.2.1",
     "nyc": "^11.2.1",
     "steal": "^1.5.8",
     "steal-tools": "^1.8.4"
